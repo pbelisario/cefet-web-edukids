@@ -1,8 +1,10 @@
 /* Exercício 1: Criar uma transição para quando o mouse estiver em cima dos
  * botões play/stop (para que o elemento se revele lentamente)
  */
- #controles ul {}
-
+ #controles ul {
+    transition: transform 300ms linear;
+ }
+    
 /*
  * Exercício 2: Você deve implementar uma metáfora visual para cada um dos 4
  * estados dos animais. Algumas sugestões:
@@ -11,17 +13,56 @@
  *   - perturbado: animal fica pulsando
  *   - instinto-selvagem: animal dá um salto e cresce, com uma borda vermelha
  */
-.agitado {}
+.agitado {
+    animation: piscando 0.4s linear 0s infinite alternate;
+}
 .agitado img {}
+@keyframes piscando {
+    0% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}
 
-.alimentado {}
-.alimentado img {}
+.alimentado {
+    animation: girando 0.4s linear 0s infinite;
 
-.perturbado {}
+}
+
+.alimentado img {
+    border-color: lightgreen;
+}
+
+@keyframes girando {
+    25% {transform: rotate(+20deg)}
+    75% {transform: rotate(-20deg)}
+}
+
+
+
+.perturbado {
+    animation: pulsando 0.1s ease-in-out 0s infinite;
+}
 .perturbado img {}
 
-.instinto-selvagem {}
-.instinto-selvagem img {}
+@keyframes pulsando {
+    25% { transform: translateX(-12px) }
+    75% { transform: translateX(12px) }
+}
+
+
+.instinto-selvagem {
+    animation: selvagem 0.8s linear 0.1s 1;
+}
+
+.instinto-selvagem img {
+    border-color: darkred;
+}
+
+@keyframes selvagem {
+    0% { transform: translateY(16px) }
+    0% { transform: translateY(-16px) }
+    0% { transform: translateY(0px) }
+    90% { transform: scale(1.2) }
+}
 
 /*
  * Exercício 3: Criar uma imagem sprite com as imagens dos botões de controle
@@ -32,8 +73,13 @@
  */
 
 .comecar,
-.parar {}
+.parar {
+    display: inline-block;
+    background-image: url('imgs/sprite-controles.png')
+}
 
 .comecar {}
 
-.parar {}
+.parar {
+    background-position: -24px;
+}
